@@ -19,7 +19,7 @@ class Editorial(models.Model):
     Direccion = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.nombre
+        return self.Nombre
 
 
 class Autor(models.Model):
