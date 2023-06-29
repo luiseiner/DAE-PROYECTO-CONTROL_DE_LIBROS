@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import Prestamo, Encargado, Estudiante
 
-# Create your views here.
+def lista_prestamos(request):
+    prestamos = Prestamo.objects.all()
+    return render(request, 'ListaPrestamos.html', {'prestamo': prestamos})

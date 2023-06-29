@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 
 class Categoria(models.Model):
     Idcategoria = models.AutoField(primary_key=True)
