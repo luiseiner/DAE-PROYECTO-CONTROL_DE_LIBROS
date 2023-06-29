@@ -2,115 +2,115 @@ from django.db import models
 from django.db import models
 
 class Categoria(models.Model):
-    idcategoria = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
+    Idcategoria = models.AutoField(primary_key=True)
+    Nombre = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.nombre
+        return self.Nombre
 
 
 class Editorial(models.Model):
-    ideditorial = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    telefono = models.CharField(max_length=20)
-    correo = models.EmailField()
-    pais = models.CharField(max_length=50)
-    ciudad = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=200)
+    idEditorial = models.AutoField(primary_key=True)
+    Nombre = models.CharField(max_length=100)
+    Telefono = models.CharField(max_length=20)
+    Correo = models.EmailField()
+    Pais = models.CharField(max_length=50)
+    Ciudad = models.CharField(max_length=50)
+    Direccion = models.CharField(max_length=200)
 
     def __str__(self):
         return self.nombre
 
 
 class Autor(models.Model):
-    idautor = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    genero = models.CharField(max_length=20)
-    apellido = models.CharField(max_length=100)
-    fecha_nacimiento = models.DateField()
-    nacionalidad = models.CharField(max_length=50)
+    IdAutor = models.AutoField(primary_key=True)
+    Nombre = models.CharField(max_length=100)
+    Genero = models.CharField(max_length=20)
+    Apellido = models.CharField(max_length=100)
+    Fecha_nacimiento = models.DateField()
+    Nacionalidad = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.nombre
+        return self.Nombre
 
 
 class Libro(models.Model):
-    idlibro = models.AutoField(primary_key=True)
-    titulo = models.CharField(max_length=100)
-    isbn = models.CharField(max_length=20)
-    autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
-    editorial = models.ForeignKey(Editorial, on_delete=models.CASCADE)
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    año_publicacion = models.PositiveIntegerField()
-    disponibilidad = models.BooleanField(default=True)
+    IdLibro = models.AutoField(primary_key=True)
+    Titulo = models.CharField(max_length=100)
+    ISBN = models.CharField(max_length=20)
+    Autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
+    Editorial = models.ForeignKey(Editorial, on_delete=models.CASCADE)
+    Categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    Año_publicacion = models.PositiveIntegerField()
+    Disponibilidad = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.titulo
+        return self.Titulo
 
 
 class Prestamo(models.Model):
-    idprestamo = models.AutoField(primary_key=True)
-    encargado = models.ForeignKey('Encargado', on_delete=models.CASCADE)
-    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
-    estudiante = models.ForeignKey('Estudiante', on_delete=models.CASCADE)
-    fecha_prestamo = models.DateField()
-    fecha_devolucion = models.DateField()
+    IdPrestamo = models.AutoField(primary_key=True)
+    IdEncargado = models.ForeignKey('Encargado', on_delete=models.CASCADE)
+    IdLibro = models.ForeignKey(Libro, on_delete=models.CASCADE)
+    IdEstudiante = models.ForeignKey('Estudiante', on_delete=models.CASCADE)
+    FechaPrestamo = models.DateField()
+    FechaDevolucion = models.DateField()
 
     def __str__(self):
-        return f"Prestamo {self.idprestamo}"
+        return f"Prestamo {self.IdPrestamo}"
 
 
 class Devolucion(models.Model):
-    iddevolucion = models.AutoField(primary_key=True)
-    prestamo = models.OneToOneField(Prestamo, on_delete=models.CASCADE)
-    fecha_entrega = models.DateField()
-    estado = models.CharField(max_length=50)
+    IdDevolucion = models.AutoField(primary_key=True)
+    IdPrestamo = models.OneToOneField(Prestamo, on_delete=models.CASCADE)
+    Fecha_entrega = models.DateField()
+    Estado = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"Devolucion {self.iddevolucion}"
+        return f"Devolucion {self.IdDevolucion}"
 
 
 class Penalizacion(models.Model):
-    idpenalizacion = models.AutoField(primary_key=True)
-    estudiante = models.OneToOneField('Estudiante', on_delete=models.CASCADE)
-    fecha_inicio = models.DateField()
-    fecha_final = models.DateField()
-    estado = models.CharField(max_length=50)
+    IdPenalizacion = models.AutoField(primary_key=True)
+    IdEstudiante = models.OneToOneField('Estudiante', on_delete=models.CASCADE)
+    Falseecha_inicio = models.DateField()
+    Fecha_final = models.DateField()
+    Estado = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"Penalizacion {self.idpenalizacion}"
+        return f"Penalizacion {self.IdPenalizacion}"
 
 
 class Estudiante(models.Model):
-    idestudiante = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    apellido = models.CharField(max_length=100)
-    dni = models.CharField(max_length=20)
-    direccion = models.CharField(max_length=200)
-    telefono = models.CharField(max_length=20)
-    correo = models.EmailField()
+    IdEstudiante = models.AutoField(primary_key=True)
+    Nombre = models.CharField(max_length=100)
+    Apellido = models.CharField(max_length=100)
+    DNI = models.CharField(max_length=20)
+    Direccion = models.CharField(max_length=200)
+    Telefono = models.CharField(max_length=20)
+    Correo = models.EmailField()
 
     def __str__(self):
-        return self.nombre
+        return self.Nombre
 
 
 class Encargado(models.Model):
-    idencargado = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    apellido = models.CharField(max_length=100)
-    direccion = models.CharField(max_length=200)
-    telefono = models.CharField(max_length=20)
-    correo = models.EmailField()
-    credenciales = models.OneToOneField('Credenciales', on_delete=models.CASCADE)
+    IdEncargado = models.AutoField(primary_key=True)
+    Nombre = models.CharField(max_length=100)
+    Apellido = models.CharField(max_length=100)
+    Direccion = models.CharField(max_length=200)
+    Telefono = models.CharField(max_length=20)
+    Correo = models.EmailField()
+    IdCredenciales = models.OneToOneField('Credenciales', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nombre
+        return self.Nombre
 
 
 class Credenciales(models.Model):
-    idcredenciales = models.AutoField(primary_key=True)
-    usuario = models.CharField(max_length=50)
-    contraseña = models.CharField(max_length=50)
+    IdCredenciales = models.AutoField(primary_key=True)
+    Usuario = models.CharField(max_length=50)
+    Contraseña = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.usuario
+        return self.Usuario
